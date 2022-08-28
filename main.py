@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import List
 from requests import get
-from json import load
+
 @dataclass
 class Vehicle:
     number_linie: int
