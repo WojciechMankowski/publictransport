@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Optional
 
 
 @dataclass
@@ -31,3 +32,8 @@ class StopsInSequence(BusStop):
 class BusRide:
     line_number: str
     stops: list[StopsInSequence]
+
+    def stop_by_id(self, stop_id: int) -> Optional[StopsInSequence]:
+        for stop in self.stops:
+            if stop.id == stop_id:
+                return stop

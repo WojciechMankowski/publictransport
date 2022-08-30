@@ -3,11 +3,9 @@ import math
 from datetime import datetime
 from typing import List
 from requests import get
-
 from classes_to_dowlaond import BusStop, StopsInSequence, BusRide, Vehicle
 
 VEHICLES_DATA_URL = "https://ckan2.multimediagdansk.pl/gpsPositions"
-
 
 def load_vehicles_data() -> List[Vehicle]:
     vehicles_response = get(VEHICLES_DATA_URL)
@@ -17,7 +15,6 @@ def load_vehicles_data() -> List[Vehicle]:
         Vehicle(number_linie=vehicle_info["Line"], latitude=vehicle_info["Lat"], longitude=vehicle_info["Lon"], )
         for vehicle_info in vehicles_data["Vehicles"]
     ]
-
 
 def load_busstps():
     url = "https://ckan.multimediagdansk.pl/dataset/c24aa637-3619-4dc2-a171-a23eec8f2172/resource/4c4025f0-01bf-41f7" \
