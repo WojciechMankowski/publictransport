@@ -58,7 +58,9 @@ def load_bus_ride(numebr_line):
         stop_id = stop_info["stopId"]
         base_bus_date = all_bus_stop_id[stop_id]
         time = datetime.strptime(stop_info["departureTime"], "%Y-%m-%dT%H:%M:%S").time()
-        bus_stop_on_ride = StopsInSequence(**dataclasses.asdict(base_bus_date), order=stop_info, time=time, )
+        bus_stop_on_ride = StopsInSequence(id=base_bus_date.id, name_busstop=base_bus_date.name_busstop,
+                                           latitude=base_bus_date.latitude, longitude=base_bus_date.longitude,
+                                           order=orders, time=time, )
         ride.stops.append(bus_stop_on_ride)
 
         previous_stop_order = orders

@@ -37,3 +37,5 @@ class BusRide:
         for stop in self.stops:
             if stop.id == stop_id:
                 return stop
+    def __str__(self):
+        return f"Linia: {self.line_number}, przystanki: {self.stops}"

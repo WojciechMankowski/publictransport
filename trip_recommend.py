@@ -16,7 +16,6 @@ class TripProposal:
         return f"{self.line_number}: {self.stops_on_trip}"
     @property
     def src_stop(self) -> StopsInSequence:
-        # print(self.stops_on_trip)
         return self.stops_on_trip[0]
 
     @property
@@ -45,15 +44,12 @@ def recommend_trip(
                 if not dst_stop_on_ride:
                     continue
 
-                if src_stop_on_ride.order["order"] > dst_stop_on_ride.order["order"]:
+                if src_stop_on_ride.order > dst_stop_on_ride.order:
                     continue
                 stops_start_index = ride.stops.index(src_stop_on_ride)
                 stops_end_index = ride.stops.index(dst_stop_on_ride) + 1
-                # print(ride.stops[stops_end_index])
-                stops_on_trip = ride.stops[stops_end_index:stops_start_index]
-                # print(f"stops_on_trip: {stops_on_trip}")
-                if len(stops_on_trip) != 0:
-                    trip_proposal = TripProposal(line_number=ride.line_number, stops_on_trip=stops_on_trip)
+                stops_on_trip = ride.stops[stops_start_index:stops_end_index]
+                trip_proposal = TripProposal(line_number=ride.line_number, stops_on_trip=stops_on_trip)
                 if trip_proposal.departure > datetime.now().time():
                     return trip_proposal
 
@@ -65,5 +61,4 @@ if __name__ == '__main__':
     addres = "Majkowskiego 8 Gdańsk"
     start_palce = find_location(addres)
     stops_from_start_palce = calculate_the_distance_from_the_stops(start_palce, 200, stops)
-    rec = recommend_trip(stops, stops_from_start_palce, busrides)
-    print(rec)
+    recommend_trip(stops, stops_from_start_palce, busrides)
