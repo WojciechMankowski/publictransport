@@ -13,7 +13,6 @@ def creatinMap(vehicles: List[Vehicle], trip: TripProposal):
 
     for vehicle in vehicles:
         if vehicle.number_linie == number_linie:
-            print(vehicle)
             vehicle_info = f"Linia numer {vehicle.number_linie}"
             _create_circle_marker(vehicle.location, color="red", popup=vehicle_info).add_to(trip_map)
 
